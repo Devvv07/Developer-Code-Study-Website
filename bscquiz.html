@@ -1,0 +1,1488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/p4.jpg') }}">
+
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Test your Python programming knowledge with this interactive BSC Python Quiz. Features timer, instant feedback, and review system.">
+<title>BSC Python Programming Quiz - Test Your Python Knowledge</title>
+<style>
+:root {
+            --bg-color: #f5f5f5;
+            --text-color: #1a1a2e;
+            --card-bg: #ffffff;
+            --particles-color: #333333;
+            --border-color: #e0e0e0;
+            
+            --primary: #3b82f6;
+            --primary-glow: #60a5fa;
+            --secondary: #10b981;
+            --accent: #8b5cf6;
+            --tertiary: #06b6d4;
+            --success: #22c55e;
+            --error: #ef4444;
+            --warning: #f59e0b;
+            
+            --gradient-hero: linear-gradient(135deg, #3b82f6, #8b5cf6);
+            --gradient-cool: linear-gradient(45deg, #06b6d4, #10b981);
+            --gradient-warm: linear-gradient(45deg, #8b5cf6, #f59e0b);
+            
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.1);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.15);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.2);
+        }
+
+        .dark {
+            --bg-color: #0f172a;
+            --text-color: #f8fafc;
+            --card-bg: #1e293b;
+            --particles-color: #ffffff;
+            --border-color: #334155;
+            --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.3);
+            --shadow-md: 0 8px 24px rgba(0, 0, 0, 0.4);
+            --shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.5);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: var(--bg-color);
+            color: var(--text-color);
+            overflow-x: hidden;
+            transition: background 0.3s ease, color 0.3s ease;
+            line-height: 1.6;
+        }
+
+        .particles-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            overflow: hidden;
+        }
+
+        .particle {
+            position: absolute;
+            width: 4px;
+            height: 4px;
+            background: var(--particles-color);
+            border-radius: 50%;
+            opacity: 0.3;
+            animation: float 20s infinite linear;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(100px, 100px) rotate(90deg); }
+            50% { transform: translate(0, 200px) rotate(180deg); }
+            75% { transform: translate(-100px, 100px) rotate(270deg); }
+        }
+
+        @keyframes pulse-glow {
+            0%, 100% { box-shadow: 0 0 20px rgba(59, 130, 246, 0.5); }
+            50% { box-shadow: 0 0 40px rgba(139, 92, 246, 0.8); }
+        }
+
+        @keyframes slide-up {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .theme-toggle {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            z-index: 50;
+            padding: 12px;
+            border-radius: 50%;
+            background: var(--card-bg);
+            border: none;
+            cursor: pointer;
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            color: var(--text-color);
+        }
+
+        .theme-toggle:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 20px rgba(3, 95, 243, 0.937);
+        }
+
+        .timer {
+            position: fixed;
+            top: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 40;
+            padding: 12px 24px;
+            border-radius: 30px;
+            font-weight: 600;
+            color: white;
+            background: var(--gradient-hero);
+            box-shadow: var(--shadow-md);
+            display: none;
+        }
+
+        .timer.warning {
+            background: var(--gradient-warm);
+            animation: pulse-glow 1s infinite;
+        }
+
+        .container {;
+            max-width: 1000px;
+
+            margin: 0 auto;
+            padding: 80px 20px 40px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 16px;
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: slide-up 0.6s ease;
+        }
+
+        .subtitle {
+            text-align: center;
+            color: var(--text-color);
+            opacity: 0.7;
+            margin-bottom: 48px;
+            animation: slide-up 0.8s ease;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: var(--shadow-md);
+            margin-bottom: 32px;
+            backdrop-filter: blur(10px);
+            animation: slide-up 0.6s ease;
+        }
+
+        .start-icon {
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 24px;
+            background: var(--gradient-hero);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            animation: rotate 3s ease-in-out infinite;
+
+
+        }
+
+        .info-box {
+            background: rgba(59, 130, 246, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin: 24px 0;
+        }
+
+        .info-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .info-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .btn {
+            background: var(--gradient-hero);
+            color: white;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 30px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: block;
+            margin: 0 auto;
+            box-shadow: var(--shadow-md);
+        }
+
+        .btn:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: 0 0 30px rgba(59, 130, 246, 0.5);
+        }
+
+        .btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        .btn-destructive {
+            background: linear-gradient(135deg, var(--error), #dc2626);
+        }
+
+        .btn-small {
+            padding: 8px 16px;
+            font-size: 14px;
+            display: inline-block;
+        }
+
+        .score-display {
+            text-align: center;
+            padding: 40px;
+            margin-bottom: 32px;
+        }
+
+        .score-emoji {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .score-title {
+            font-size: 32px;
+            font-weight: bold;
+            background: var(--gradient-cool);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 8px;
+        }
+
+        .score-number {
+            font-size: 48px;
+            font-weight: bold;
+            color: var(--text-color);
+            margin-bottom: 16px;
+        }
+
+        .question-card {
+            background: var(--card-bg);
+            border-radius: 16px;
+            padding: 32px;
+            margin-bottom: 24px;
+            border-left: 4px solid var(--primary);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.3s ease;
+        }
+
+        .question-card:hover {
+            box-shadow: var(--shadow-md);
+        }
+
+        .question-title {
+            font-size: 20px;
+            font-weight: 600;
+            margin-bottom: 24px;
+            color: var(--text-color);
+        }
+
+        .options {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .option-btn {
+            padding: 16px 20px;
+            border: 2px solid var(--border-color);
+            background: var(--card-bg);
+            border-radius: 12px;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: var(--text-color);
+            font-size: 16px;
+        }
+
+        .option-btn:hover {
+            border-color: var(--primary);
+            background: rgba(59, 130, 246, 0.05);
+            transform: translateX(8px);
+        }
+
+        .option-btn.selected {
+            border-color: var(--primary);
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .option-btn.correct {
+            border-color: var(--success);
+            background: rgba(34, 197, 94, 0.1);
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .option-btn.wrong {
+            border-color: var(--error);
+            background: rgba(239, 68, 68, 0.1);
+            color: var(--error);
+        }
+
+        .option-btn:disabled {
+            cursor: default;
+        }
+        
+        #hea{
+            margin-top: 130px;
+            font-size: 70px;
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        }
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text-color);
+        }
+
+        .form-input1 {
+           flex: 1;
+         padding: 10px 14px;
+  border: 2px solid var(--border-color, #ccc);
+  border-radius: 8px;
+  background: var(--card-bg, #1e1e1e);
+  color: var(--text-color, #fff);
+  font-size: 16px;
+  outline: none;
+  transition: all 0.3s ease;
+   font-family: inherit;
+            transition: all 0.3s ease;
+            -webkit-text-security: disc; /* Forces dots */
+            -moz-text-security: disc;
+            text-security: disc;
+}
+
+
+            .form-input1:focus {
+                border-color: var(--primary);
+                box-shadow: 0 0 0 3px rgba(236, 237, 238, 0.952);
+            }
+
+
+        .form-input, .form-textarea {
+            width: 100%;
+            padding: 12px 96px;
+            border: 2px solid var(--border-color);
+            border-radius: 8px;
+            background: var(--card-bg);
+            color: white;
+            font-size: 16px;
+           
+            
+        }
+        
+
+        .form-input:focus, .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(236, 237, 238, 0.952);
+        }
+        .form-input::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .form-textarea {
+            min-height: 120px;
+            resize: vertical;
+        }
+
+        .rating-stars {
+            display: flex;
+            gap: 8px;
+            margin-top: 8px;
+            justify-content: center;
+
+        }
+
+        .star {
+            width: 32px;
+            height: 32px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
+            fill: #d1d5db;
+            color: #d1d5db;
+        }
+
+        .star:hover {
+            transform: scale(1.1);
+        }
+
+        .star.active {
+            fill: var(--warning);
+            color: var(--warning);
+        }
+
+        .review-card {
+            background: var(--card-bg);
+            border: 2px solid var(--border-color);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 24px;
+            transition: all 0.3s ease;
+        }
+
+        .review-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-md);
+        }
+
+        .review-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .review-author {
+            font-weight: bold;
+            font-size: 18px;
+            color: var(--text-color);
+        }
+
+        .review-email {
+            font-size: 14px;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .review-rating {
+            display: flex;
+            gap: 4px;
+            margin-top: 8px;
+        }
+
+        .review-rating svg {
+            width: 16px;
+            height: 16px;
+        }
+
+        .review-actions {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .review-date {
+            font-size: 14px;
+            color: var(--text-color);
+            opacity: 0.7;
+        }
+
+        .delete-btn {
+            background: var(--error);
+            color: white;
+            border: none;
+            padding: 8px;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .delete-btn:hover {
+            background: #dc2626;
+            transform: scale(1.1);
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 48px 20px;
+        }
+
+        .empty-emoji {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 32px;
+        }
+
+        .section-title {
+            font-size: 32px;
+            font-weight: bold;
+            background: var(--gradient-cool);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+    .admin-form {
+        display: flex;
+        gap: 12px;
+        align-items: flex-end;
+        margin-bottom: 24px;
+        color: white;
+
+    }
+
+        .admin-form input {
+            flex: 1;
+           
+        }
+
+        .warning-box {
+            background: rgba(245, 158, 11, 0.1);
+            border: 2px solid rgba(245, 158, 11, 0.5);
+            border-radius: 16px;
+            padding: 20px;
+            text-align: center;
+            margin-top: 32px;
+        }
+
+        .reset-link {
+            display: block;
+            text-align: center;
+            margin-top: 24px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s ease;
+        }
+
+        .reset-link:hover {
+            color: var(--primary-glow);
+        }
+
+        .hidden {
+            display: none !important;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2rem;
+            }
+
+            .card {
+                padding: 24px;
+            }
+
+            .container {
+                padding: 60px 16px 24px;
+            }
+
+            .section-header {
+                flex-direction: column;
+                gap: 16px;
+                align-items: flex-start;
+            }
+        }
+
+        #menu {
+    position: fixed;
+    position:absolute;
+    top: 50px;
+    right: 1100px;
+    display: flex;
+    gap: 20px;
+    z-index: 1;
+}
+
+#menu button {
+    background: linear-gradient(145deg, #3b2e1a, #1e140a);
+    color: #f8e5b8;
+    border: 1.5px solid #d4af37;
+    border-radius: 14px;
+    padding: 12px 30px;
+    font-family: 'Georgia', serif;
+    font-size: 18px;
+    letter-spacing: 1px;
+    box-shadow: inset 0 0 10px rgba(255, 215, 0, 0.2), 0 0 12px rgba(212, 175, 55, 0.3);
+    transition: all 0.4s ease;
+}
+
+#menu button:hover {
+    background: linear-gradient(145deg, #d4af37, #a47c1b);
+    color: #1a1a2e;
+    transform: scale(1.12);
+    box-shadow: 0 0 30px #ffea7b, 0 0 60px rgba(255, 215, 0, 0.3);
+}
+.quiz-section {
+    margin-top: 60px;
+    padding: 40px;
+    border-radius: 20px;
+    background: var(--card-bg);
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.quiz-title {
+    text-align: center;
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 30px;
+    background: linear-gradient(45deg, var(--primary), var(--secondary));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+}
+
+.quiz-box {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 30px;
+    border-radius: 20px;
+    border: 2px solid var(--border-color);
+    background: rgba(255, 255, 255, 0.05);
+    color: var(--text-color);
+    transition: all 0.4s ease;
+}
+
+.question-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.timer, .score {
+    font-weight: 600;
+    font-size: 18px;
+}
+
+.question-box {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.options-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    gap: 12px;
+}
+
+.options-list li {
+    background: rgba(255, 255, 255, 0.1);
+    padding: 12px 16px;
+    border-radius: 10px;
+    border: 2px solid transparent;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.options-list li:hover {
+    border-color: var(--primary);
+    transform: scale(1.03);
+    background: rgba(59, 130, 246, 0.1);
+}
+
+.options-list li.selected {
+    background: var(--primary);
+    color: #fff;
+    border-color: var(--primary);
+    transform: scale(1.05);
+}
+
+.btn {
+    display: block;
+    width: 100%;
+    padding: 14px 20px;
+    margin-top: 20px;
+    font-size: 18px;
+    font-weight: 600;
+    color: #fff;
+    background: var(--gradient-primary);
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 30px rgba(59, 130, 246, 0.4),
+                0 0 60px rgba(139, 92, 246, 0.2);
+}
+
+.result-box {
+    margin-top: 20px;
+    text-align: center;
+    font-size: 22px;
+    font-weight: 700;
+}
+
+.hidden {
+    display: none;
+}
+</style>
+</head>
+<body>
+    <!-- Same body structure as bcaquiz.html -->
+    <!-- Just replace heading -->
+    
+        <div class="particles-container" id="particles"></div>
+
+    <div id="menu">
+  <!-- 🏠 Menu/Home -->
+  <a href="{{ url_for('index') }}">
+    <button>Menu</button>
+  </a>&nbsp;
+
+  <!-- ℹ️ About -->
+  <a href="{{ url_for('view_about') }}">
+    <button>About</button>
+  </a>&nbsp;
+
+  <!-- 💬 Feedback -->
+  <a href="{{ url_for('index') }}#feedback">
+    <button>Feedback</button>
+  </a>
+</div>
+
+    <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">
+        <svg id="sunIcon" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="moonIcon" class="hidden" width="24" height="24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <div class="timer" id="timer">Time: <span id="timeDisplay">5:00</span></div>
+
+    <div class="container">
+        <h1 id="hea">BSC<br> Web Development Quiz</h1>
+        <p class="subtitle">Test your Web Development knowledge with 10 challenging questions</p>
+
+        <!-- Start Screen -->
+        <div id="startScreen" class="card">
+            <div class="start-icon">🐍</div>
+            <h2 style="text-align: center; margin-bottom: 16px; font-size: 24px;">Welcome to the Web Development Quiz!</h2>
+            <div class="info-box">
+                <div class="info-item">
+                    <span class="info-icon">⏱️</span>
+                    <p>You have <strong>5 minutes</strong> to complete this quiz</p>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">📝</span>
+                    <p>Answer all <strong>10 questions</strong></p>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">✅</span>
+                    <p>Select the best answer for each question</p>
+                </div>
+                <div class="info-item">
+                    <span class="info-icon">🎯</span>
+                    <p>Submit when you're ready or when time runs out</p>
+                </div>
+            </div>
+            <button class="btn" onclick="startQuiz()">Start Quiz</button>
+        </div>
+
+        <!-- Score Display -->
+        <div id="scoreDisplay" class="card hidden">
+            <div class="score-display">
+                <div class="score-emoji" id="scoreEmoji">🎉</div>
+                <h2 class="score-title">Your Score</h2>
+                <div class="score-number"><span id="scoreValue">0</span> / 10</div>
+                <p id="scoreMessage" style="font-size: 18px; margin-bottom: 24px; opacity: 0.8;"></p>
+                <button class="btn" onclick="resetQuiz()">Retake Quiz</button>
+            </div>
+        </div>
+
+        <!-- Quiz Questions -->
+        <div id="quizQuestions" class="hidden"></div>
+
+        <!-- Submit Button -->
+        <button id="submitBtn" class="btn hidden" onclick="submitQuiz()">Submit Quiz</button>
+        <a href="#" class="reset-link hidden" id="resetLink" onclick="resetQuiz(); return false;">← Reset Quiz</a><br><br><br><br><hr align="center" width="960px"><br><br><br><br>
+
+        <section class="quiz-section" id="dsaQuizSection">
+    <div class="quiz-container">
+        <h2 class="quiz-title">DSA (Data Structures & Algorithms) Quiz</h2>
+
+        <div class="quiz-box" id="dsaQuizBox">
+            <div class="question-header">
+                <p id="dsaTimer" class="timer">⏱ Time Left: <span id="dsaTime">60</span>s</p>
+              
+            </div>
+
+            <div id="dsaQuestionBox" class="question-box"></div>
+            <ul id="dsaOptionsList" class="options-list"></ul>
+
+            <button id="dsaNextBtn" class="btn next-btn">Next Question</button>
+
+            <div id="dsaResultBox" class="result-box hidden"></div>
+        </div>
+    </div>
+</section>
+
+<br><br><hr align="center" width="960px" id="fd"><br><br><br><br>
+        <!-- Feedback Form -->
+        <div class="card">
+            <h2 style="text-align: center; font-size: 32px; background: var(--gradient-hero); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 32px;">Share Your Feedback</h2>
+            <form onsubmit="submitFeedback(event)" style="max-width: 600px; margin: 0 auto;">
+                <div class="form-group">
+                    <label class="form-label" for="feedbackName">Name</label>
+                    <input type="text" id="feedbackName" class="form-input" placeholder="Enter your name" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="feedbackEmail">Email</label>
+                    <input type="email" id="feedbackEmail" class="form-input" placeholder="Enter your email" required>
+                </div>
+                <div class="form-group">
+                    <label class="form-label" align="center">Rating: <span id="ratingValue">5</span> Stars</label>
+                    <div class="rating-stars" id="ratingStars" >
+                        <svg class="star active" onclick="setRating(1)" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg class="star active" onclick="setRating(2)" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg class="star active" onclick="setRating(3)" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg class="star active" onclick="setRating(4)" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                        <svg class="star active" onclick="setRating(5)" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon></svg>
+                    </div><!-- In Result Box or Form -->
+                    <input type="tel" id="phone" placeholder="Phone Number" required>  <!-- NEW -->
+                    <input type="hidden" id="quiz_name" value="BSc Web Development Quiz">  <!-- NEW for bsc, change for others -->
+                </div>
+                <div class="form-group">
+                    <label class="form-label" for="feedbackMessage">Your Feedback</label>
+                    <textarea id="feedbackMessage" class="form-textarea" placeholder="Share your experience with the quiz..." required></textarea>
+                </div>
+                <button type="submit" class="btn" style="width: 100%;">Submit Feedback</button>
+            </form>
+        </div>
+
+        <!-- Admin Login -->
+        <div id="adminLogin" class="card" style="max-width: 500px; margin: 32px auto;">
+            <h3 style="text-align: center; margin-bottom: 16px;">Admin Access</h3>
+            <div class="admin-form">
+                <input type="password" id="adminPassword" class="form-input1" placeholder="Enter admin password" onkeydown="if(event.key==='Enter') adminLogin()">
+                <button class="btn btn-small" onclick="adminLogin()">Login</button>
+            </div>
+            <p style="text-align: center; font-size: 14px; margin-top: 12px; opacity: 0.7;">Demo password: <strong>admin123</strong></p>
+        </div>
+
+        <!-- Reviews Section -->
+        <div class="card">
+            <div class="section-header">
+                <h2 class="section-title">User Reviews (<span id="reviewCount">0</span>)</h2>
+                <button id="adminLogout" class="btn btn-small btn-destructive hidden" onclick="adminLogout()">Logout Admin</button>
+            </div>
+            <div id="reviewsContainer"></div>
+        </div>
+
+      <!-- Warning Box -->
+        <div id="warningBox" class="warning-box hidden">
+            <p>⚠️ <strong>Alert</strong> This Site is only for Study Purpose, Best Of Luck </p>
+        </div>
+    </div>
+
+
+<script>
+// ===== SAME JAVASCRIPT AS IN BCA QUIZ =====
+// Only change the title if you want
+const questions = [
+    {
+        id: 1,
+        question: "1). HTML stands for?",
+        options: [
+            "A) Hyperlinks and Text Markup Language",
+            "B) Hyper Text Markup Language",
+            "C) Home Tool Markup Language",
+            "D) Hyperlinks Text Managing Language"
+        ],
+        correct: "B"
+    },
+    {
+        id: 2,
+        question: "2). Which tag is used to insert a line break in HTML?",
+        options: ["A) hr", "B) br", "C) break", "D) newline"],
+        correct: "B"
+    },
+    {
+        id: 3,
+        question: "3). CSS is used for?",
+        options: [
+            "A) Structuring content",
+            "B) Adding style and layout",
+            "C) Storing data",
+            "D) Running scripts"
+        ],
+        correct: "B"
+    },
+    {
+        id: 4,
+        question: "4). Which HTML tag is used to display an image?",
+        options: ["A) img", "B) src", "C) image", "D) pic"],
+        correct: "A"
+    },
+    {
+        id: 5,
+        question: "5). Which property is used in CSS to change text color?",
+        options: ["A) font-color", "B) text-color", "C) color", "D) background-color"],
+        correct: "C"
+    },
+    {
+        id: 6,
+        question: "6). In JavaScript, which symbol is used for single-line comments?",
+        options: ["A) <!-- -->", "B) //", "C) /* */", "D) #"],
+        correct: "B"
+    },
+    {
+        id: 7,
+        question: "7). Which method is used to select an HTML element by ID in JavaScript?",
+        options: ["A) getElementsByName()", "B) getElementById()", "C) querySelectorAll()", "D) selectId()"],
+        correct: "B"
+    },
+    {
+        id: 8,
+        question: "8). Which CSS property controls the text size?",
+        options: ["A) font-size", "B) text-style", "C) text-size", "D) font-weight"],
+        correct: "A"
+    },
+    {
+        id: 9,
+        question: "9). Which attribute is used in HTML to provide a unique name to an element?",
+        options: ["A) class", "B) style", "C) id", "D) name"],
+        correct: "C"
+    },
+    {
+        id: 10,
+        question: "10). What does DOM stand for?",
+        options: [
+            "A) Document Object Model",
+            "B) Data Object Management",
+            "C) Display Object Mode",
+            "D) Document Order Method"
+        ],
+        correct: "A"
+    }
+];
+
+// ==== SAME JS BELOW ====
+
+        let timeLeft = 300;
+        let timerInterval;
+        let selectedAnswers = {};
+        let quizSubmitted = false;
+        let currentRating = 5;
+        let isAdmin = false;
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', function() {
+            createParticles();
+            loadTheme();
+            loadReviews();
+            checkAdminStatus();
+        });
+
+        function createParticles() {
+            const container = document.getElementById('particles');
+            for (let i = 0; i < 50; i++) {
+                const particle = document.createElement('div');
+                particle.className = 'particle';
+                particle.style.left = Math.random() * 100 + '%';
+                particle.style.top = Math.random() * 100 + '%';
+                particle.style.animationDelay = Math.random() * 20 + 's';
+                particle.style.animationDuration = (15 + Math.random() * 10) + 's';
+                container.appendChild(particle);
+            }
+        }
+
+        function loadTheme() {
+            const theme = localStorage.getItem('theme');
+            if (theme === 'dark') {
+                document.documentElement.classList.add('dark');
+                document.getElementById('sunIcon').classList.add('hidden');
+                document.getElementById('moonIcon').classList.remove('hidden');
+            }
+        }
+
+        document.getElementById('themeToggle').addEventListener('click', function() {
+            document.documentElement.classList.toggle('dark');
+            const isDark = document.documentElement.classList.contains('dark');
+            document.getElementById('sunIcon').classList.toggle('hidden', isDark);
+            document.getElementById('moonIcon').classList.toggle('hidden', !isDark);
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        function startQuiz() {
+            document.getElementById('startScreen').classList.add('hidden');
+            document.getElementById('quizQuestions').classList.remove('hidden');
+            document.getElementById('submitBtn').classList.remove('hidden');
+            document.getElementById('timer').style.display = 'block';
+            renderQuestions();
+            startTimer();
+            showToast('Quiz started! Good luck!', 'success');
+        }
+
+        function renderQuestions() {
+            const container = document.getElementById('quizQuestions');
+            container.innerHTML = questions.map(q => `
+                <div class="question-card" data-id="${q.id}">
+                    <h3 class="question-title">${q.question}</h3>
+                    <div class="options">
+                        ${q.options.map(opt => `
+                            <button class="option-btn" onclick="selectAnswer(${q.id}, '${opt.charAt(0)}')" data-option="${opt.charAt(0)}">
+                                ${opt}
+                            </button>
+                        `).join('')}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function selectAnswer(questionId, answer) {
+            if (quizSubmitted) return;
+            
+            selectedAnswers[questionId] = answer;
+            const card = document.querySelector(`.question-card[data-id="${questionId}"]`);
+            const buttons = card.querySelectorAll('.option-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('selected');
+                if (btn.dataset.option === answer) {
+                    btn.classList.add('selected');
+                }
+            });
+        }
+
+        function startTimer() {
+            updateTimerDisplay();
+            timerInterval = setInterval(() => {
+                timeLeft--;
+                updateTimerDisplay();
+                
+                if (timeLeft <= 60) {
+                    document.getElementById('timer').classList.add('warning');
+                }
+                
+                if (timeLeft <= 0) {
+                    clearInterval(timerInterval);
+                    submitQuiz();
+                }
+            }, 1000);
+        }
+
+        function updateTimerDisplay() {
+            const mins = Math.floor(timeLeft / 60);
+            const secs = timeLeft % 60;
+            document.getElementById('timeDisplay').textContent = `${mins}:${secs.toString().padStart(2, '0')}`;
+        }
+
+        function submitQuiz() {
+            if (quizSubmitted) {
+                showToast('You have already submitted the quiz!', 'error');
+                return;
+            }
+
+            // Check if all questions answered
+            const unanswered = questions.filter(q => !selectedAnswers[q.id]);
+            if (unanswered.length > 0) {
+                showToast('Please select an answer for all questions!', 'error');
+                return;
+            }
+
+            clearInterval(timerInterval);
+            quizSubmitted = true;
+            document.getElementById('timer').style.display = 'none';
+
+            // Calculate score
+            let score = 0;
+            questions.forEach(q => {
+                const card = document.querySelector(`.question-card[data-id="${q.id}"]`);
+                const buttons = card.querySelectorAll('.option-btn');
+                const selectedAnswer = selectedAnswers[q.id];
+
+                if (selectedAnswer === q.correct) {
+                    score++;
+                }
+
+                buttons.forEach(btn => {
+                    btn.disabled = true;
+                    const option = btn.dataset.option;
+                    
+                    if (option === q.correct) {
+                        btn.classList.add('correct');
+                    } else if (option === selectedAnswer && option !== q.correct) {
+                        btn.classList.add('wrong');
+                    }
+                });
+            });
+
+            // Display score
+            document.getElementById('scoreValue').textContent = score;
+            const emoji = score >= 8 ? '🎉' : score >= 6 ? '👍' : '📚';
+            const message = score >= 8 ? "Excellent work! You're a Python pro! 🌟" :
+                           score >= 6 ? "Good job! Keep practicing! 💪" :
+                           "Keep learning! You'll improve! 🚀";
+            
+            document.getElementById('scoreEmoji').textContent = emoji;
+            document.getElementById('scoreMessage').textContent = message;
+            document.getElementById('scoreDisplay').classList.remove('hidden');
+            document.getElementById('submitBtn').classList.add('hidden');
+            document.getElementById('resetLink').classList.remove('hidden');
+
+            showToast(`Quiz completed! You scored ${score}/10`, 'success');
+
+            setTimeout(() => {
+                document.getElementById('scoreDisplay').scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }, 100);
+        }
+
+        function resetQuiz() {
+            selectedAnswers = {};
+            quizSubmitted = false;
+            timeLeft = 300;
+            clearInterval(timerInterval);
+            
+            document.getElementById('startScreen').classList.remove('hidden');
+            document.getElementById('quizQuestions').classList.add('hidden');
+            document.getElementById('quizQuestions').innerHTML = '';
+            document.getElementById('submitBtn').classList.add('hidden');
+            document.getElementById('resetLink').classList.add('hidden');
+            document.getElementById('scoreDisplay').classList.add('hidden');
+            document.getElementById('timer').style.display = 'none';
+            document.getElementById('timer').classList.remove('warning');
+            
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            showToast('Quiz reset!', 'info');
+        }
+
+        // Rating
+        function setRating(rating) {
+            currentRating = rating;
+            document.getElementById('ratingValue').textContent = rating;
+            const stars = document.querySelectorAll('.star');
+            stars.forEach((star, index) => {
+                if (index < rating) {
+                    star.classList.add('active');
+                } else {
+                    star.classList.remove('active');
+                }
+            });
+        }
+
+        // Feedback
+        function submitFeedback(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('feedbackName').value.trim();
+            const email = document.getElementById('feedbackEmail').value.trim();
+            const message = document.getElementById('feedbackMessage').value.trim();
+
+            if (!name || !email || !message) {
+                showToast('Please fill in all fields', 'error');
+                return;
+            }
+
+            const review = {
+                id: Date.now().toString(),
+                name,
+                email,
+                rating: currentRating,
+                feedback: message,
+                date: new Date().toLocaleDateString()
+            };
+
+            const reviews = JSON.parse(localStorage.getItem('quizReviews') || '[]');
+            reviews.unshift(review);
+            localStorage.setItem('quizReviews', JSON.stringify(reviews));
+
+            document.getElementById('feedbackName').value = '';
+            document.getElementById('feedbackEmail').value = '';
+            document.getElementById('feedbackMessage').value = '';
+            setRating(5);
+
+            loadReviews();
+            showToast('Thank you for your feedback!', 'success');
+
+            setTimeout(() => {
+                document.getElementById('reviewsContainer').scrollIntoView({ behavior: 'smooth' });
+            }, 100);
+        }
+
+        // Reviews
+        function loadReviews() {
+            const reviews = JSON.parse(localStorage.getItem('quizReviews') || '[]');
+            const container = document.getElementById('reviewsContainer');
+            document.getElementById('reviewCount').textContent = reviews.length;
+
+            if (reviews.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-emoji">💬</div>
+                        <p style="opacity: 0.7; font-size: 18px;">No reviews yet. Be the first to share your feedback!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = reviews.map(review => `
+                <div class="review-card">
+                    <div class="review-header">
+                        <div>
+                            <div class="review-author">${review.name}</div>
+                            <div class="review-email">${review.email}</div>
+                            <div class="review-rating">
+                                ${Array.from({length: 5}, (_, i) => `
+                                    <svg class="${i < review.rating ? 'star active' : 'star'}" viewBox="0 0 24 24">
+                                        <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+                                    </svg>
+                                `).join('')}
+                            </div>
+                        </div>
+                        <div class="review-actions">
+                            <span class="review-date">${review.date}</span>
+                            ${isAdmin ? `<button class="delete-btn" onclick="deleteReview('${review.id}')">
+                                <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                    <polyline points="3 6 5 6 21 6"></polyline>
+                                    <path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                            </button>` : ''}
+                        </div>
+                    </div>
+                    <p>${review.feedback}</p>
+                </div>
+            `).join('');
+        }
+
+        function deleteReview(id) {
+            const reviews = JSON.parse(localStorage.getItem('quizReviews') || '[]');
+            const filtered = reviews.filter(r => r.id !== id);
+            localStorage.setItem('quizReviews', JSON.stringify(filtered));
+            loadReviews();
+            showToast('Review deleted', 'success');
+        }
+
+        // Admin
+        function checkAdminStatus() {
+            isAdmin = localStorage.getItem('isAdmin') === 'true';
+            updateAdminUI();
+        }
+
+        function adminLogin() {
+            const password = document.getElementById('adminPassword').value;
+            if (password === 'dev123') {
+                isAdmin = true;
+                localStorage.setItem('isAdmin', 'true');
+                document.getElementById('adminPassword').value = '';
+                updateAdminUI();
+                loadReviews();
+                showToast('Admin access granted', 'success');
+            } else {
+                showToast('Invalid admin password', 'error');
+            }
+        }
+
+        
+        
+
+        function adminLogout() {
+            isAdmin = false;
+            localStorage.removeItem('isAdmin');
+            updateAdminUI();
+            loadReviews();
+            showToast('Admin logged out', 'info');
+        }
+
+        function updateAdminUI() {
+            document.getElementById('adminLogin').classList.toggle('hidden', isAdmin);
+            document.getElementById('adminLogout').classList.toggle('hidden', !isAdmin);
+            document.getElementById('warningBox').classList.toggle('hidden', !isAdmin);
+        }
+
+        // Toast notifications
+        function showToast(message, type = 'info') {
+            const toast = document.createElement('div');
+            const colors = {
+                success: '#22c55e',
+                error: '#ef4444',
+                info: '#3b82f6'
+            };
+            
+            toast.style.cssText = `
+                position: fixed;
+                bottom: 24px;
+                right: 24px;
+                background: ${colors[type] || colors.info};
+                color: white;
+                padding: 16px 24px;
+                border-radius: 12px;
+                box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+                z-index: 1000;
+                animation: slide-up 0.3s ease;
+                max-width: 400px;
+            `;
+            toast.textContent = message;
+            document.body.appendChild(toast);
+
+            setTimeout(() => {
+                toast.style.opacity = '0';
+                toast.style.transform = 'translateY(20px)';
+                toast.style.transition = 'all 0.3s ease';
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+    </script>
+    <script>
+// =========================
+//  DSA QUIZ FUNCTIONALITY
+// =========================
+
+// DSA Questions
+const dsaQuestions = [
+    {
+        question: "1). Which data structure uses LIFO (Last In First Out) principle?",
+        options: ["A) Queue", "B) Stack", "C) Linked List", "D) Tree"],
+        correct: "B"
+    },
+    {
+        question: "2). What is the time complexity of binary search algorithm?",
+        options: ["A) O(n)", "B) O(log n)", "C) O(n log n)", "D) O(1)"],
+        correct: "B"
+    },
+    {
+        question: "3). Which data structure is used in BFS (Breadth First Search)?",
+        options: ["A) Stack", "B) Queue", "C) Graph", "D) Tree"],
+        correct: "B"
+    },
+    {
+        question: "4). Which traversal of binary tree gives sorted order for BST?",
+        options: ["A) Preorder", "B) Postorder", "C) Inorder", "D) Level order"],
+        correct: "C"
+    },
+    {
+        question: "5). Which of the following is a divide and conquer algorithm?",
+        options: ["A) Bubble Sort", "B) Merge Sort", "C) Insertion Sort", "D) Selection Sort"],
+        correct: "B"
+    },
+    {
+        question: "6). What is the worst-case time complexity of quicksort?",
+        options: ["A) O(n)", "B) O(log n)", "C) O(n^2)", "D) O(n log n)"],
+        correct: "C"
+    },
+    {
+        question: "7). Which data structure is used for implementing recursion?",
+        options: ["A) Queue", "B) Stack", "C) Linked List", "D) Tree"],
+        correct: "B"
+    },
+    {
+        question: "8). Which algorithm is used to find the shortest path in a graph?",
+        options: ["A) Kruskal’s Algorithm", "B) Dijkstra’s Algorithm", "C) Prim’s Algorithm", "D) Floyd–Warshall Algorithm"],
+        correct: "B"
+    },
+    {
+        question: "9). Which of these is a non-linear data structure?",
+        options: ["A) Array", "B) Linked List", "C) Tree", "D) Stack"],
+        correct: "C"
+    },
+    {
+        question: "10). What is the time complexity to insert an element at the end of an array (without resizing)?",
+        options: ["A) O(n)", "B) O(1)", "C) O(log n)", "D) O(n log n)"],
+        correct: "B"
+    }
+];
+
+// DOM Elements
+const dsaQuestionBox = document.getElementById('dsaQuestionBox');
+const dsaOptionsList = document.getElementById('dsaOptionsList');
+const dsaNextBtn = document.getElementById('dsaNextBtn');
+const dsaResultBox = document.getElementById('dsaResultBox');
+const dsaTimerValue = document.getElementById('dsaTime');
+const dsaScoreValue = document.getElementById('dsaScoreValue');
+
+let dsaIndex = 0;
+let dsaScore = 0;
+let dsaTime = 60;
+let dsaTimer;
+
+// Load Question
+function loadDsaQuestion() {
+    const q = dsaQuestions[dsaIndex];
+    dsaQuestionBox.textContent = q.question;
+    dsaOptionsList.innerHTML = '';
+
+    q.options.forEach((opt) => {
+        const li = document.createElement('li');
+        li.textContent = opt;
+        li.onclick = () => selectDsaOption(li, q.correct);
+        dsaOptionsList.appendChild(li);
+    });
+}
+
+// Select Option
+function selectDsaOption(selected, correct) {
+    const allOptions = dsaOptionsList.querySelectorAll('li');
+    allOptions.forEach(opt => opt.classList.remove('selected'));
+    selected.classList.add('selected');
+
+    if (selected.textContent.startsWith(correct)) {
+        dsaScore++;
+        dsaScoreValue.textContent = dsaScore;
+    }
+}
+
+// Next Question
+dsaNextBtn.addEventListener('click', () => {
+    dsaIndex++;
+    if (dsaIndex < dsaQuestions.length) {
+        loadDsaQuestion();
+    } else {
+        showDsaResult();
+    }
+});
+
+// Show Result
+function showDsaResult() {
+    clearInterval(dsaTimer);
+    dsaQuestionBox.style.display = 'none';
+    dsaOptionsList.style.display = 'none';
+    dsaNextBtn.style.display = 'none';
+    dsaResultBox.classList.remove('hidden');
+    dsaResultBox.innerHTML = `
+        <h3>🎯 Quiz Completed!</h3>
+        <p>Your Score: <strong>${dsaScore} / ${dsaQuestions.length}</strong></p>
+    `;
+}
+
+// Start Timer
+function startDsaTimer() {
+    dsaTimer = setInterval(() => {
+        dsaTime--;
+        dsaTimerValue.textContent = dsaTime;
+        if (dsaTime <= 0) {
+            clearInterval(dsaTimer);
+            showDsaResult();
+        }
+    }, 1000);
+}
+
+// Start Quiz
+loadDsaQuestion();
+startDsaTimer();
+</script>
+</body>
+</html>

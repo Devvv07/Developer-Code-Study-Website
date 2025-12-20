@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Code Ninja{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <header>
+        <div class="logo">Code Ninja</div>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About</a>
+            <div class="dropdown">...</div>
+        </nav>
+        <button id="theme-toggle">Sun/Moon</button>
+    </header>
+
+    <main>{% block content %}{% endblock %}</main>
+
+    <!-- Feedback + Reviews -->
+    <section class="feedback-section">
+        <form id="feedback-form">
+            <input type="text" name="name" placeholder="Name" required>
+            <input type="email" name="email" placeholder="Email" required>
+            <textarea name="feedback" placeholder="Feedback" required></textarea>
+            <input type="hidden" name="score" id="rating-value" value="5">
+            <div class="star-rating">
+                <span class="star" data-rating="1">Star</span>
+                <span class="star" data-rating="2">Star</span>
+                <span class="star" data-rating="3">Star</span>
+                <span class="star" data-rating="4">Star</span>
+                <span class="star active" data-rating="5">Star</span>
+            </div>
+            <button type="submit">Submit</button>
+        </form>
+
+        <h2>Reviews (<span id="reviewCount">0</span>)</h2>
+        <canvas id="reviewChart" width="400" height="200"></canvas>
+        <div id="reviewsContainer"></div>
+    </section>
+
+    <!-- Scripts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>

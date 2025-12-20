@@ -1,0 +1,606 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BTech Java Important Questions - Code Ninja</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/p4.jpg') }}">
+
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            transition: background 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            padding: 20px;
+        }
+        .sidebar {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            margin-right: 20px;
+            margin-top: 150px;
+        }
+        .dark-mode .sidebar {
+            background: rgba(30, 30, 30, 0.9);
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin: 10px 0;
+        }
+        .sidebar a {
+            color: #e91e63;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .sidebar a:hover {
+            color: #ff5722;
+        }
+        .main-content {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode .main-content {
+            background: rgba(30, 30, 30, 0.95);
+        }
+        h1 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 25px;
+            border-left: 5px solid #e91e63;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.05), rgba(156, 39, 176, 0.05));
+            border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        .section:nth-child(1) { animation-delay: 0.2s; }
+        .section:nth-child(2) { animation-delay: 0.4s; }
+        .section:nth-child(3) { animation-delay: 0.6s; }
+        .section:nth-child(4) { animation-delay: 0.8s; }
+        .section:nth-child(5) { animation-delay: 1s; }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .section h2 {
+            color: #e91e63;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section h2 i {
+            margin-right: 10px;
+            color: #ff5722;
+        }
+        .question-item {
+            margin: 25px 0;
+            padding: 20px;
+            border-left: 4px solid #e91e63;
+            background: rgba(233, 30, 99, 0.05);
+            border-radius: 8px;
+            transition: all 0.3s;
+        }
+        .question-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(233, 30, 99, 0.2);
+        }
+        .question-item h3 {
+            color: #e91e63;
+            margin-bottom: 10px;
+        }
+        .marks {
+            display: inline-block;
+            background: #e91e63;
+            color: white;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 14px;
+            margin-left: 10px;
+        }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        ul {
+            line-height: 2;
+        }
+        .quiz {
+            margin: 40px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.1));
+            border-radius: 10px;
+            text-align: center;
+        }
+        .quiz h3 {
+            color: #4caf50;
+        }
+        .quiz button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .quiz button:hover {
+            background: #45a049;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e91e63;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .theme-toggle:hover {
+            background: #ff5722;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+        .sidebar1 {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  padding: 20px 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+/* ======== LEFT ROUND MENU ======== */
+.sidebar1 {
+  position: fixed;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px; /* spacing between buttons */
+  z-index: 1000;
+}
+
+/* Circular glowing buttons */
+.menu-btn {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 3px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  animation: slowBounce 3s ease-in-out infinite;
+}
+
+/* Glow + hover effect */
+.menu-btn:hover {
+  background: linear-gradient(135deg, var(--primary), var(--primary-glow));
+  color: white;
+  transform: scale(1.15);
+  box-shadow: 0 0 30px rgba(233, 30, 99, 0.6);
+}
+
+/* Smooth infinite bounce animation */
+@keyframes slowBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Optional: different animation delay for each button (staggered bounce) */
+.menu-btn:nth-child(1) {
+  animation-delay: 0s;
+}
+.menu-btn:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.menu-btn:nth-child(3) {
+  animation-delay: 1.2s;
+}
+.top-left-heading {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, rgb(209, 64, 64), rgb(203, 157, 71), rgb(188, 188, 63), rgb(77, 194, 77), rgb(56, 206, 206), rgb(45, 45, 190), violet);
+           
+          
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+            animation: rgbFlow 8s linear infinite;
+            transition: all 0.3s ease;
+        }
+        @keyframes rgbFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .top-left-heading:hover {
+            animation: rgbFlow 2s linear infinite;
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+        .letter {
+            display: inline-block;
+            animation: fadeSlide 1s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+     <h2 id="code-ninja-title" class="top-left-heading">CoDevelopers</h2>
+
+      <!-- Floating Sidebar Navigation -->
+<nav class="sidebar1">
+  <!-- 🏠 Home Button -->
+  <button class="menu-btn" title="Home" onclick="location.href='{{ url_for('index') }}'">
+    <i class="fas fa-home"></i>
+  </button>
+
+  <!-- 🏆 Leaderboard Button -->
+  <button class="menu-btn" title="Leaderboard" onclick="location.href='{{ url_for('index') }}#fd'">
+    <i class="fas fa-trophy"></i>
+  </button>
+
+  <!-- 💬 Feedback Button -->
+  <button class="menu-btn" title="Feedback" onclick="location.href='{{ url_for('view_btechquiz') }}#fd'">
+    <i class="fas fa-comment"></i>
+  </button>
+</nav>
+
+    
+    <button id="theme-toggle" class="theme-toggle">
+        <span id="sun-icon">☀️</span>
+        <span id="moon-icon" style="display: none;">🌙</span>
+    </button>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="#short">Short Answer Questions</a></li>
+                <li><a href="#long">Long Answer Questions</a></li>
+                <li><a href="#programming">Programming Questions</a></li>
+                <li><a href="#mcq">Multiple Choice Questions</a></li>
+                <li><a href="#quiz">Interactive Java Quiz</a></li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <h1>BTech Java Paperset</h1>
+            
+            <div id="short" class="section">
+                <h2><i class="fas fa-question-circle"></i> Short Answer Questions (2-3 Marks)</h2>
+                
+                <div class="question-item">
+                    <h3>Q1. What is the difference between JDK, JRE, and JVM? <span class="marks">3 Marks</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <ul>
+                        <li><strong>JDK (Java Development Kit):</strong> Complete development kit with compiler, debugger, and tools</li>
+                        <li><strong>JRE (Java Runtime Environment):</strong> Runtime environment to execute Java programs</li>
+                        <li><strong>JVM (Java Virtual Machine):</strong> Virtual machine that executes bytecode</li>
+                    </ul>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q2. Explain the concept of constructor in Java. <span class="marks">3 Marks</span></h3>
+                    <p><strong>Answer:</strong> A constructor is a special method that is called when an object is instantiated. It has the same name as the class and no return type. Used to initialize object state.</p>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q3. What is method overloading and overriding? <span class="marks">3 Marks</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <ul>
+                        <li><strong>Overloading:</strong> Same method name with different parameters in the same class (compile-time polymorphism)</li>
+                        <li><strong>Overriding:</strong> Child class redefines parent class method with same signature (runtime polymorphism)</li>
+                    </ul>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q4. Difference between String and StringBuffer. <span class="marks">2 Marks</span></h3>
+                    <p><strong>Answer:</strong> String is immutable (cannot be changed), while StringBuffer is mutable (can be modified). StringBuffer is thread-safe.</p>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q5. What is the main method in Java? <span class="marks">2 Marks</span></h3>
+                    <p><strong>Answer:</strong> The main method is the entry point of a Java program. It has signature: public static void main(String[] args). JVM calls this method to start execution.</p>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q6. What is the difference between == and equals() method? <span class="marks">3 Marks</span></h3>
+                    <p><strong>Answer:</strong> == compares object references (memory addresses), while equals() compares content/values. For strings, equals() compares character sequences.</p>
+                </div>
+            </div>
+
+            <div id="long" class="section">
+                <h2><i class="fas fa-book"></i> Long Answer Questions (5-10 Marks)</h2>
+
+                <div class="question-item">
+                    <h3>Q7. Explain the concept of inheritance with an example. <span class="marks">5 Marks</span></h3>
+                    <p><strong>Answer:</strong> Inheritance is a mechanism where a new class acquires properties and methods of an existing class. The existing class is called parent/super class and new class is called child/sub class.</p>
+                    <p><strong>Types:</strong> Single, Multilevel, Hierarchical, Multiple (through interfaces)</p>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q8. What is exception handling? Explain try-catch-finally block. <span class="marks">7 Marks</span></h3>
+                    <p><strong>Answer:</strong> Exception handling is a mechanism to handle runtime errors. Try block contains code that might throw exception, catch block handles the exception, and finally block always executes regardless of exception.</p>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q9. Explain different types of access modifiers in Java. <span class="marks">5 Marks</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <ul>
+                        <li><strong>private:</strong> Accessible only within the class</li>
+                        <li><strong>default:</strong> Accessible within the package</li>
+                        <li><strong>protected:</strong> Accessible within package and subclasses</li>
+                        <li><strong>public:</strong> Accessible everywhere</li>
+                    </ul>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q10. What is multithreading? Explain thread lifecycle. <span class="marks">7 Marks</span></h3>
+                    <p><strong>Answer:</strong> Multithreading is concurrent execution of multiple threads. Thread lifecycle states: New, Runnable, Running, Blocked/Waiting, Terminated.</p>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q11. Explain abstract class and interface with differences. <span class="marks">7 Marks</span></h3>
+                    <p><strong>Answer:</strong> Abstract class can have abstract and concrete methods. Interface can only have abstract methods (before Java 8). A class can extend one abstract class but implement multiple interfaces.</p>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q12. What is Java Collections Framework? Explain List, Set, and Map. <span class="marks">10 Marks</span></h3>
+                    <p><strong>Answer:</strong> Collections Framework provides architecture to store and manipulate groups of objects.</p>
+                    <ul>
+                        <li><strong>List:</strong> Ordered collection, allows duplicates (ArrayList, LinkedList)</li>
+                        <li><strong>Set:</strong> Unordered collection, no duplicates (HashSet, TreeSet)</li>
+                        <li><strong>Map:</strong> Key-value pairs, unique keys (HashMap, TreeMap)</li>
+                    </ul>
+                </div>
+            </div>
+
+            <div id="programming" class="section">
+                <h2><i class="fas fa-code"></i> Programming Questions</h2>
+
+                <div class="question-item">
+                    <h3>Q13. Write a Java program to check if a number is prime. <span class="marks">5 Marks</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <div class="code-block">
+<pre><code class="language-java">public class PrimeCheck {
+    public static boolean isPrime(int n) {
+        if (n <= 1) return false;
+        for (int i = 2; i <= Math.sqrt(n); i++) {
+            if (n % i == 0) return false;
+        }
+        return true;
+    }
+    
+    public static void main(String[] args) {
+        System.out.println(isPrime(7)); // true
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q14. Write a program to reverse a string in Java. <span class="marks">3 Marks</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <div class="code-block">
+<pre><code class="language-java">public class ReverseString {
+    public static void main(String[] args) {
+        String str = "hello";
+        String reversed = new StringBuilder(str).reverse().toString();
+        System.out.println(reversed); // olleh
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q15. Write a program to implement inheritance in Java. <span class="marks">5 Marks</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <div class="code-block">
+<pre><code class="language-java">class Animal {
+    void sound() {
+        System.out.println("Animal makes sound");
+    }
+}
+
+class Dog extends Animal {
+    void sound() {
+        System.out.println("Dog barks");
+    }
+    
+    public static void main(String[] args) {
+        Dog dog = new Dog();
+        dog.sound(); // Dog barks
+    }
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <div id="mcq" class="section">
+                <h2><i class="fas fa-list"></i> Multiple Choice Questions (MCQs)</h2>
+
+                <div class="question-item">
+                    <h3>Q16. Which of the following is not a Java keyword? <span class="marks">1 Mark</span></h3>
+                    <p><strong>Answer:</strong> c) include</p>
+                    <ul>
+                        <li>a) class</li>
+                        <li>b) interface</li>
+                        <li>c) include</li>
+                        <li>d) extends</li>
+                    </ul>
+                </div>
+
+                <div class="question-item">
+                    <h3>Q17. What is the default value of a boolean variable in Java? <span class="marks">1 Mark</span></h3>
+                    <p><strong>Answer:</strong> b) false</p>
+                    <ul>
+                        <li>a) true</li>
+                        <li>b) false</li>
+                        <li>c) null</li>
+                        <li>d) 0</li>  
+                    </ul>
+                </div>
+                <div class="question-item">
+                    <h3>Q18. Which collection class allows duplicate elements? <span class="marks">1 Mark</span></h3>
+                    <p><strong>Answer:</strong> a) List</p>
+                    <ul>
+                        <li>a) List</li>
+                        <li>b) Set</li>
+                        <li>c) Map</li>
+                        <li>d) Queue</li>
+                    </ul>
+                </div>
+            </div>
+           
+            <div id="demo-output" class="code-block" style="display:none; margin-top:20px;"></div>
+            <div id="quiz" class="quiz">
+                <h2><i class="fas fa-question-circle"></i> Interactive Java Quiz</h2>
+                <h3>What is the size of int variable in Java?</h3>
+                <button onclick="alert('Correct!')">4 bytes</button>
+                <button onclick="alert('Incorrect!')">2 bytes</button>
+                <button onclick="alert('Incorrect!')">8 bytes</button>
+                <button onclick="alert('Incorrect!')">16 bytes</button>
+            </div>
+             <a href="index.html" style="display: block; text-align: center; margin-top: 30px; color: #e91e63; font-size: 18px;">← Back to Home</a>
+            <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80 },
+                color: { value: "#333333" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5 },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#333333", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 3 }
+            }
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            sunIcon.style.display = isDark ? 'none' : 'block';
+            moonIcon.style.display = isDark ? 'block' : 'none';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        function runDemo() {
+            const output = document.getElementById('demo-output');
+            output.innerHTML = "Iteration: 1<br>Iteration: 2<br>Iteration: 3<br>Iteration: 4<br>Iteration: 5";
+            output.style.display = 'block';
+        }
+    </script>
+    </div>
+</div>
+</body>
+</html>
+            
+                        

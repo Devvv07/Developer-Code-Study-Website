@@ -1,0 +1,589 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BSc Web Development Interview Questions - Code Ninja</title>
+        <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/p4.jpg') }}">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/themes/prism-tomorrow.min.css" rel="stylesheet">
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            font-family: 'Roboto', sans-serif;
+            margin: 0;
+            padding: 0;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: #333;
+            transition: background 0.3s, color 0.3s;
+        }
+        .dark-mode {
+            background: linear-gradient(135deg, #2c3e50 0%, #34495e 100%);
+            color: #ecf0f1;
+        }
+        #particles-js {
+            position: fixed;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            padding: 20px;
+        }
+        .sidebar {
+            width: 250px;
+            background: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 20px;
+            height: fit-content;
+            margin-right: 20px;
+            margin-top: 150px;
+        }
+        .dark-mode .sidebar {
+            background: rgba(30, 30, 30, 0.9);
+        }
+        .sidebar ul {
+            list-style: none;
+            padding: 0;
+        }
+        .sidebar li {
+            margin: 10px 0;
+        }
+        .sidebar a {
+            color: #e91e63;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        .sidebar a:hover {
+            color: #ff5722;
+        }
+        .main-content {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 40px;
+            border-radius: 15px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+        }
+        .dark-mode .main-content {
+            background: rgba(30, 30, 30, 0.95);
+        }
+        h1 {
+            text-align: center;
+            color: #e91e63;
+            margin-bottom: 40px;
+            font-size: 2.5em;
+        }
+        .section {
+            margin: 30px 0;
+            padding: 25px;
+            border-left: 5px solid #e91e63;
+            background: linear-gradient(135deg, rgba(233, 30, 99, 0.05), rgba(156, 39, 176, 0.05));
+            border-radius: 10px;
+            animation: fadeIn 1s ease-in-out;
+            opacity: 0;
+            animation-fill-mode: forwards;
+        }
+        .section:nth-child(1) { animation-delay: 0.2s; }
+        .section:nth-child(2) { animation-delay: 0.4s; }
+        .section:nth-child(3) { animation-delay: 0.6s; }
+        .section:nth-child(4) { animation-delay: 0.8s; }
+        .section:nth-child(5) { animation-delay: 1s; }
+        .section:nth-child(6) { animation-delay: 1.2s; }
+        @keyframes fadeIn {
+            to { opacity: 1; }
+        }
+        .section h2 {
+            color: #e91e63;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+        }
+        .section h2 i {
+            margin-right: 10px;
+            color: #ff5722;
+        }
+        .interview-item {
+            margin: 25px 0;
+            padding: 25px;
+            background: rgba(233, 30, 99, 0.05);
+            border-radius: 10px;
+            border-left: 5px solid #e91e63;
+            transition: all 0.3s;
+        }
+        .interview-item:hover {
+            transform: translateX(10px);
+            box-shadow: 0 5px 20px rgba(233, 30, 99, 0.2);
+        }
+        .interview-item h3 {
+            color: #e91e63;
+            margin-bottom: 15px;
+        }
+        .difficulty {
+            display: inline-block;
+            padding: 5px 15px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: bold;
+            margin-left: 10px;
+        }
+        .easy { background: #4caf50; color: white; }
+        .medium { background: #ff9800; color: white; }
+        .hard { background: #f44336; color: white; }
+        .code-block {
+            background: #1e1e1e;
+            color: #d4d4d4;
+            padding: 20px;
+            border-radius: 8px;
+            overflow-x: auto;
+            margin: 15px 0;
+            font-family: 'Courier New', monospace;
+        }
+        ul {
+            line-height: 2;
+        }
+        .quiz {
+            margin: 40px 0;
+            padding: 25px;
+            background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(139, 195, 74, 0.1));
+            border-radius: 10px;
+            text-align: center;
+        }
+        .quiz h3 {
+            color: #4caf50;
+        }
+        .quiz button {
+            background: #4caf50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        .quiz button:hover {
+            background: #45a049;
+        }
+        .theme-toggle {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #e91e63;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            cursor: pointer;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background 0.3s;
+        }
+        .theme-toggle:hover {
+            background: #ff5722;
+        }
+        @media (max-width: 768px) {
+            .container {
+                flex-direction: column;
+            }
+            .sidebar {
+                width: 100%;
+                margin-bottom: 20px;
+            }
+        }
+         .sidebar1 {
+  position: fixed;
+  top: 50%;
+  left: 20px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 25px;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 20px;
+  padding: 20px 15px;
+  box-shadow: 0 0 20px rgba(0,0,0,0.2);
+  z-index: 1000;
+}
+
+/* ======== LEFT ROUND MENU ======== */
+.sidebar1 {
+  position: fixed;
+  top: 50%;
+  left: 30px;
+  transform: translateY(-50%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px; /* spacing between buttons */
+  z-index: 1000;
+}
+
+/* Circular glowing buttons */
+.menu-btn {
+  width: 65px;
+  height: 65px;
+  border-radius: 50%;
+  border: 3px solid var(--border-color);
+  background: var(--card-bg);
+  color: var(--text-color);
+  font-size: 26px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 15px rgba(0,0,0,0.2);
+  animation: slowBounce 3s ease-in-out infinite;
+}
+
+/* Glow + hover effect */
+.menu-btn:hover {
+  background: linear-gradient(135deg, var(--primary), var(--primary-glow));
+  color: white;
+  transform: scale(1.15);
+  box-shadow: 0 0 30px rgba(233, 30, 99, 0.6);
+}
+
+/* Smooth infinite bounce animation */
+@keyframes slowBounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Optional: different animation delay for each button (staggered bounce) */
+.menu-btn:nth-child(1) {
+  animation-delay: 0s;
+}
+.menu-btn:nth-child(2) {
+  animation-delay: 0.6s;
+}
+.menu-btn:nth-child(3) {
+  animation-delay: 1.2s;
+}
+ .top-left-heading {
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+            font-size: 52px;
+            font-weight: 700;
+            color: #fff;
+            letter-spacing: 2px;
+            background: linear-gradient(90deg, rgb(209, 64, 64), rgb(203, 157, 71), rgb(188, 188, 63), rgb(77, 194, 77), rgb(56, 206, 206), rgb(45, 45, 190), violet);
+           
+          
+            text-shadow: 0 0 40px rgba(255, 255, 255, 0.2);
+            animation: rgbFlow 8s linear infinite;
+            transition: all 0.3s ease;
+        }
+        @keyframes rgbFlow {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        .top-left-heading:hover {
+            animation: rgbFlow 2s linear infinite;
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+        .letter {
+            display: inline-block;
+            animation: fadeSlide 1s ease-in-out forwards;
+            opacity: 0;
+        }
+        @keyframes fadeSlide {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div id="particles-js"></div>
+
+    <h2 id="code-ninja-title" class="top-left-heading">CoDevelopers</h2>
+
+    <!-- Floating Sidebar Navigation -->
+<nav class="sidebar1">
+  <!-- 🏠 Home Button -->
+  <button class="menu-btn" title="Home" onclick="location.href='{{ url_for('index') }}'">
+    <i class="fas fa-home"></i>
+  </button>
+
+  <!-- 🏆 Leaderboard Button -->
+  <button class="menu-btn" title="Leaderboard" onclick="location.href='{{ url_for('index') }}#fd'">
+    <i class="fas fa-trophy"></i>
+  </button>
+
+  <!-- 💬 Feedback Button -->
+  <button class="menu-btn" title="Feedback" onclick="location.href='{{ url_for('view_bscquiz') }}#fd'">
+    <i class="fas fa-comment"></i>
+  </button>
+</nav>
+    
+    <button id="theme-toggle" class="theme-toggle">
+        <span id="sun-icon">☀️</span>
+        <span id="moon-icon" style="display: none;">🌙</span>
+    </button>
+
+    <div class="container">
+        <div class="sidebar">
+            <h3>Navigation</h3>
+            <ul>
+                <li><a href="#basic">Basic Interview Questions</a></li>
+                <li><a href="#intermediate">Intermediate Questions</a></li>
+                <li><a href="#advanced">Advanced Questions</a></li>
+                <li><a href="#coding">Coding Interview Questions</a></li>
+                <li><a href="#behavioral">Behavioral Questions</a></li>
+                <li><a href="#quiz">Interactive Interview Quiz</a></li>
+            </ul>
+        </div>
+        
+        <div class="main-content">
+            <h1>BSc Web Development Interview Questions</h1>
+            
+            <div id="basic" class="section">
+                <h2><i class="fas fa-question-circle"></i> Basic Interview Questions</h2>
+                
+                <div class="interview-item">
+                    <h3>Q1. What is the difference between let, const, and var? <span class="difficulty easy">Easy</span></h3>
+                    <p><strong>Answer:</strong> var is function-scoped, can be redeclared. let is block-scoped, can be reassigned but not redeclared. const is block-scoped, cannot be reassigned or redeclared. Use const by default, let when reassignment needed.</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q2. Explain the difference between == and === in JavaScript. <span class="difficulty easy">Easy</span></h3>
+                    <p><strong>Answer:</strong> == compares values after type coercion (converts types). === compares both value and type without coercion (strict equality). Example: 5 == "5" is true, but 5 === "5" is false.</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q3. What is the difference between localStorage and sessionStorage? <span class="difficulty easy">Easy</span></h3>
+                    <p><strong>Answer:</strong> localStorage persists until explicitly cleared, works across tabs/windows. sessionStorage expires when tab/window closes, isolated to single tab. Both store data as strings, 5-10MB limit.</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q4. What are semantic HTML elements? <span class="difficulty easy">Easy</span></h3>
+                    <p><strong>Answer:</strong> Semantic elements describe meaning to browser and developer (&lt;header&gt;, &lt;nav&gt;, &lt;main&gt;, &lt;article&gt;, &lt;section&gt;, &lt;aside&gt;, &lt;footer&gt;). Improve accessibility, SEO, and code readability compared to generic &lt;div&gt;.</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q5. What is the box model in CSS? <span class="difficulty easy">Easy</span></h3>
+                    <p><strong>Answer:</strong> Every element is a box with content, padding, border, margin. Total width = content + padding + border + margin. Use box-sizing: border-box to include padding/border in width calculation.</p>
+                </div>
+            </div>
+
+            <div id="intermediate" class="section">
+                <h2><i class="fas fa-brain"></i> Intermediate Questions</h2>
+
+                <div class="interview-item">
+                    <h3>Q6. What is CSS specificity and how is it calculated? <span class="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong> Specificity determines which CSS rule applies when multiple rules target same element. Calculated as: Inline styles (1000) > IDs (100) > Classes/attributes (10) > Elements (1). !important overrides all.</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q7. Explain event bubbling and event capturing. <span class="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong> Event bubbling: event propagates from target element up to root. Event capturing: event propagates from root down to target. Use addEventListener's third parameter to control: true for capture, false for bubble (default).</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q8. Explain CSS Flexbox vs Grid. When to use each? <span class="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong> Flexbox is one-dimensional (row OR column), best for components, navigation, aligning items. Grid is two-dimensional (rows AND columns), best for page layouts, complex designs. Can be combined for powerful layouts.</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q9. What are HTTP methods and their uses? <span class="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <ul>
+                        <li><strong>GET:</strong> Retrieve data (idempotent)</li>
+                        <li><strong>POST:</strong> Create new resource</li>
+                        <li><strong>PUT:</strong> Update entire resource</li>
+                        <li><strong>PATCH:</strong> Partial update</li>
+                        <li><strong>DELETE:</strong> Remove resource</li>
+                    </ul>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q10. Explain hoisting in JavaScript. <span class="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong> Hoisting moves declarations to top of scope during compilation. var declarations hoisted with undefined value. Function declarations fully hoisted. let/const hoisted but in temporal dead zone until initialization. Always declare at top to avoid confusion.</p>
+                </div>
+            </div>
+
+            <div id="advanced" class="section">
+                <h2><i class="fas fa-cogs"></i> Advanced Questions</h2>
+
+                <div class="interview-item">
+                    <h3>Q11. What is closure in JavaScript? <span class="difficulty hard">Hard</span></h3>
+                    <p><strong>Answer:</strong> Closure is when inner function has access to outer function's variables even after outer function returns. Creates private variables, used in callbacks, event handlers, module pattern. Example: function counter with private count variable.</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q12. How does the 'this' keyword work in JavaScript? <span class="difficulty hard">Hard</span></h3>
+                    <p><strong>Answer:</strong> 'this' refers to execution context. In methods: object that owns method. In functions: global object (window). In arrow functions: lexical this (inherits from parent). Can be explicitly set with call(), apply(), bind().</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q13. Explain critical rendering path and optimization. <span class="difficulty hard">Hard</span></h3>
+                    <p><strong>Answer:</strong> Steps: DOM construction → CSSOM construction → Render tree → Layout → Paint. Optimize by: minifying CSS/JS, deferring non-critical CSS, async/defer scripts, critical CSS inline, reducing DOM depth, lazy loading images.</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q14. What is CORS and how to handle it? <span class="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong> CORS (Cross-Origin Resource Sharing) is security mechanism preventing requests from different origins. Handle with: server-side headers (Access-Control-Allow-Origin), JSONP (legacy), proxy server, or using credentials properly.</p>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q15. Explain JavaScript promises and async/await. <span class="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong> Promises represent future value, handle async operations. States: pending, fulfilled, rejected. async/await is syntactic sugar for promises, makes async code look synchronous. Use try/catch for error handling.</p>
+                </div>
+            </div>
+
+            <div id="coding" class="section">
+                <h2><i class="fas fa-code"></i> Coding Interview Questions</h2>
+
+                <div class="interview-item">
+                    <h3>Q16. Write a function to reverse a string in JavaScript. <span class="difficulty easy">Easy</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <div class="code-block">
+<pre><code class="language-javascript">function reverseString(str) {
+    return str.split('').reverse().join('');
+}
+
+console.log(reverseString("hello")); // "olleh"</code></pre>
+                    </div>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q17. Implement a debounce function. <span class="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <div class="code-block">
+<pre><code class="language-javascript">function debounce(func, delay) {
+    let timeoutId;
+    return function(...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => func.apply(this, args), delay);
+    };
+}
+
+// Usage: const debouncedSearch = debounce(searchFunction, 300);</code></pre>
+                    </div>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q18. Write CSS for a responsive navigation bar. <span class
+="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <div class="code-block">
+<pre><code class="language-css">/* Basic styles */
+nav {
+    background: #333;
+    color: white;
+    padding: 10px 20px;
+}
+
+nav a {
+    color: white;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+    nav {
+        text-align: center;
+    }
+    nav a {
+        display: block;
+        padding: 12px 0;
+    }
+}</code></pre>
+                    </div>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q19. Create a simple REST API using Node.js and Express. <span class="difficulty hard">Hard</span></h3>
+                    <p><strong>Answer:</strong></p>
+                    <div class="code-block">
+<pre><code class="language-javascript">const express = require('express');
+const app = express();
+app.use(express.json());
+app.get('/api/data', (req, res) => {
+    res.json({ message: 'Hello World' });
+});
+app.listen(3000, () => {
+    console.log('Server is running on http://localhost:3000');
+});</code></pre>
+                    </div>
+                </div>
+
+                <div class="interview-item">
+                    <h3>Q20. Explain the concept of middleware in Express. <span class="difficulty medium">Medium</span></h3>
+                    <p><strong>Answer:</strong> Middleware functions are functions that have access to the request object (req), the response object (res), and the next middleware function in the application’s request-response cycle. They can perform a variety of tasks, such as executing code, modifying the request and response objects, ending the request-response cycle, and calling the next middleware function in the stack.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+      <script src="https://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.29.0/prism.min.js"></script>
+    <script>
+        particlesJS("particles-js", {
+            particles: {
+                number: { value: 80 },
+                color: { value: "#333333" },
+                shape: { type: "circle" },
+                opacity: { value: 0.5 },
+                size: { value: 3, random: true },
+                line_linked: { enable: true, distance: 150, color: "#333333", opacity: 0.4, width: 1 },
+                move: { enable: true, speed: 3 }
+            }
+        });
+
+        const themeToggle = document.getElementById('theme-toggle');
+        const sunIcon = document.getElementById('sun-icon');
+        const moonIcon = document.getElementById('moon-icon');
+        
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        if (savedTheme === 'dark') {
+            document.body.classList.add('dark-mode');
+            sunIcon.style.display = 'none';
+            moonIcon.style.display = 'block';
+        }
+        
+        themeToggle.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            const isDark = document.body.classList.contains('dark-mode');
+            sunIcon.style.display = isDark ? 'none' : 'block';
+            moonIcon.style.display = isDark ? 'block' : 'none';
+            localStorage.setItem('theme', isDark ? 'dark' : 'light');
+        });
+
+        function runDemo() {
+            const output = document.getElementById('demo-output');
+            output.innerHTML = "Iteration: 1<br>Iteration: 2<br>Iteration: 3<br>Iteration: 4<br>Iteration: 5";
+            output.style.display = 'block';
+        }
+    </script>
+</body>
+</html>

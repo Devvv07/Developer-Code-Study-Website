@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='images/p4.jpg') }}">
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nuv Developer - Master Programming Skills</title>
+    <meta name="description" content="Master BCA, BTech, and BSc programming with comprehensive notes, quizzes, important questions, and interview prep.">
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+   <script src="{{ url_for('static', filename='script.js') }}"></script>
+</head>
+<body>
+    <!-- Particles Background -->
+    <div id="particles-js"></div>
+<a href="/about"><button id="about">About</button></a>
+    <!-- Theme Toggle -->
+    <button id="theme-toggle" class="theme-toggle" aria-label="Toggle dark mode">
+        <svg id="sun-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <circle cx="12" cy="12" r="5"></circle>
+            <line x1="12" y1="1" x2="12" y2="3"></line>
+            <line x1="12" y1="21" x2="12" y2="23"></line>
+            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+            <line x1="1" y1="12" x2="3" y2="12"></line>
+            <line x1="21" y1="12" x2="23" y2="12"></line>
+            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+        </svg>
+        <svg id="moon-icon" style="display: none;" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+        </svg>
+    </button>
+
+    <!-- Main Container -->
+    <div class="main-container">
+        <!-- Hero Section -->
+        <section class="hero-section">
+            <h1 id="code-ninja-title" class="ninja-gradient">Developers</h1>
+            
+            <!-- Field Cards -->
+            <div class="field-cards-container">
+                <div class="field-card" data-field="btech">
+                    <h2>BTECH CSE</h2>
+                    <p class="card-description" style="display: none;">Bachelor of Technology</p>
+                </div>
+                <div class="field-card" data-field="bca">
+                    <h2>BCA</h2>
+                    <p class="card-description" style="display: none;">Bachelor of Computer Applications</p>
+                </div>
+                <div class="field-card" data-field="bsc">
+                    <h2>BSC</h2>
+                    <p class="card-description" style="display: none;">Bachelor of Science in Data Science</p>
+                </div>
+            </div>
+        </section>
+        
+
+         <!-- About Section -->
+        <section class="about-section">
+            <h2 class="neon-text">About Code Ninja</h2>
+            <p>Welcome to Code Ninja, your ultimate companion for mastering programming skills! Whether you're pursuing BCA, BTech, or BSc, we provide comprehensive notes, challenging quizzes, important questions, and interview preparation materials to help you excel in your coding journey.</p>
+        </section>
+
+<!-- ==================== LEADERBOARD SECTION ==================== --><hr width="1350px" align="center" id="fd" >
+<section class="leaderboard-section">
+  <h2 class="neon-text"  >Quiz Leaderboard</h2>
+  <div id="leaderboard-list" class="leaderboard-list"></div>
+</section>
+
+<!-- ==================== POPUP CARD ==================== -->
+<div id="leaderboard-popup" class="popup-overlay">
+  <div class="popup-card">
+    <button class="popup-close" onclick="closePopup()">×</button>
+    <div class="popup-content">
+      <div class="popup-trophy" id="popup-trophy">🏆</div>
+      <h3 id="popup-name"></h3>
+      <p id="popup-field"></p>
+      <p id="popup-score"></p>
+      <p id="popup-rank"></p>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ Load your JS only once -->
+<script src="script.js"></script>
+
+
+
+        <!-- Activity Chart -->
+        <section class="chart-section">
+            <h2>Website Activity</h2>
+            <canvas id="activity-chart"></canvas>
+        </section>
+
+        <!-- Likes Chart -->
+        <section class="chart-section">
+            <h2>Website Likes</h2>
+            <canvas id="likes-chart"></canvas>
+        </section>
+
+        <!-- Feedback Section -->
+        <section class="feedback-section" id="feedback">
+            <h2 class="neon-text" >Share Your Feedback</h2>
+            <form id="feedback-form">
+                <input type="text" id="feedback-name" placeholder="Your Name" required>
+                <input type="email" id="feedback-email" placeholder="Your Email" required>
+                <textarea id="feedback-message" placeholder="Your Feedback" rows="4" required></textarea>
+                <!-- Inside <form id="feedback-form"> -->
+                <input type="tel" id="phone" class="same-input" placeholder="Your Phone" required>  <!-- NEW -->
+                <input type="hidden" id="quiz_name" value="Main Feedback">  <!-- NEW -->
+                <input type="hidden" id="rating-value" value="5">
+                <input type="hidden" id="quiz_name" value="General Review">
+                <!-- Star Rating -->
+                <div class="star-rating">
+                    <span class="star" data-rating="1">★</span>
+                    <span class="star" data-rating="2">★</span>
+                    <span class="star" data-rating="3">★</span>
+                    <span class="star" data-rating="4">★</span>
+                    <span class="star" data-rating="5">★</span>
+                </div>
+                <input type="hidden" id="rating-value" value="5">
+                
+                <button type="submit">Submit Feedback</button>
+            </form>
+
+            <!-- Reviews List -->
+            <!-- Recent Reviews Section -->
+<section class="reviews-section" style="margin: 60px 0; text-align: center;">
+    <h2 style="font-size: 2rem; margin-bottom: 30px; color: #fff;">Recent Reviews</h2>
+    <div id="reviewsContainer" style="display: flex; flex-direction: column; gap: 16px; max-width: 600px; margin: 0 auto;"></div>
+</section>
+
+        <!-- Footer -->
+        <footer>
+            <p>Developed By Dev Mohite</p>
+        </footer>
+    </div>
+
+
+        <!-- About, Leaderboard, Charts, Feedback (same as yours) -->
+        <!-- ... (keep all your sections) ... -->
+
+    </div>
+
+    <!-- Dialog Modal -->
+   
+     <div id="dialog-overlay" class="dialog-overlay" style="display: none;">
+        <div class="dialog-content">
+            <button id="dialog-close" class="dialog-close">&times;</button>
+            <h2 id="dialog-title">Select Resource</h2>
+            <div class="dialog-options">
+                <a href="#" class="dialog-option" data-resource="note">
+                    <span>📚</span>
+                    <h3>Notes</h3>
+                </a>
+                <a href="#" class="dialog-option" data-resource="quiz">
+                    <span>❓</span>
+                    <h3>Quiz</h3>
+                </a>
+                <a href="#" class="dialog-option" data-resource="paperset">
+                    <span>⭐</span>
+                    <h3>PaperSet</h3>
+                </a>
+                <a href="#" class="dialog-option" data-resource="interview">
+                    <span>💼</span>
+                    <h3>Interview Questions</h3>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <!-- Libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
+    <script src="script.js"></script>
+
+  <script>
+  const cards = document.querySelectorAll('.field-card');
+  let hideTimeout;
+
+  // Make all descriptions hidden initially
+  cards.forEach(card => {
+    const desc = card.querySelector('.card-description');
+    desc.style.display = 'none';
+    desc.style.opacity = '0';
+  });
+
+  function revealOnScroll() {
+    // clear the old hide timer -> because user is scrolling again
+    clearTimeout(hideTimeout);
+
+    cards.forEach(card => {
+      const rect = card.getBoundingClientRect();
+      const inView = rect.top < window.innerHeight - 100 && rect.bottom > 0;
+      const desc = card.querySelector('.card-description');
+
+      if (inView) {
+        card.classList.add('expanded');
+        desc.style.display = 'block';
+        setTimeout(() => { desc.style.opacity = '0.9'; }, 50);
+      }
+    });
+
+    // Start the 3-second idle timer
+    hideTimeout = setTimeout(hideDescriptions, 3000);
+  }
+
+  function hideDescriptions() {
+    cards.forEach(card => {
+      const desc = card.querySelector('.card-description');
+
+      desc.style.opacity = '0';
+      card.classList.remove('expanded');
+
+      setTimeout(() => {
+        desc.style.display = 'none';
+      }, 300);
+    });
+  }
+
+  window.addEventListener('scroll', revealOnScroll);
+</script>
+
+<!-- Particles + Chart.js + Script -->
+<div id="particles-js"></div>
+
+<script src="{{ url_for('static', filename='particles.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+
+</body>
+</html>

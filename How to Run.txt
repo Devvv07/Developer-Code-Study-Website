@@ -1,0 +1,12 @@
+>> first go inside the Vs Code
+
+>> select entire developer folder
+
+>> go vs code terminal and Type..
+
+>> PS C:\flask\developer>  venv\Scripts\Activate
+	      (for activate virtual environment)
+
+>> (venv) PS C:\flask\developer> python app.py
+
+>> open Link;👍👍👍👍👍

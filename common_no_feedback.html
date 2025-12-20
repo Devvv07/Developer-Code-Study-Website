@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Code Ninja{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Particles -->
+    <div id="particles-js"></div>
+{% if not hide_header %}
+<header>
+    <div class="logo">Code Ninja</div>
+    <nav>
+        <a href="/">Home</a>
+        <div class="dropdown">
+            <a href="#">BCA</a>
+            <div class="dropdown-content">
+                <a href="/bcaquiz">Quiz</a>
+                <a href="/bcanote">Notes</a>
+                <a href="/bcapaperset">Paper Set</a>
+            </div>
+        </div>
+    </nav>
+    <button id="theme-toggle">
+        <span id="sun-icon">Sun</span>
+        <span id="moon-icon" style="display:none;">Moon</span>
+    </button>
+</header>
+{% endif %}
+
+    <!-- Header (Same as above) -->
+    
+
+    <!-- Page Content -->
+    <main class="page-container">
+        {% block content %}{% endblock %}
+    </main>
+<nav>
+    <a href="/">Home</a>
+    <a href="/about">About</a>  <!-- YE ADD KARO -->
+    <div class="dropdown">...</div>
+    <!-- NO FEEDBACK, NO REVIEWS -->
+
+    <!-- Scripts -->
+    <script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
